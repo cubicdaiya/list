@@ -42,6 +42,9 @@ list_datum_t list_get(list_t *l, uint idx) {
   for (int i=0;i<id;++i) {
     ll = ll->next;
   }
+  if (ll == NULL) {
+    return (list_datum_t)NULL;
+  }
   return ll->datum[ACTUAL_IDX(idx, id)];
 }
 
