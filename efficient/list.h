@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define LIST_ARRAY_SIZE 5
+#define LIST_ARRAY_SIZE 1024
 
 #define LIST_MALLOC(p, n)              \
   do {                                 \
