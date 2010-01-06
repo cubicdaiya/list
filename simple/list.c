@@ -9,14 +9,18 @@ static list_t *list_extend(list_t *l) {
 list_t *list_create() {
   list_t *l;
   LIST_MALLOC(l, sizeof(list_t));
-  l->head  = l;
+  l->head  = NULL;
   l->next  = NULL;
-  l->datum = 0;
   return l;
 }
 
 list_t *list_add(list_t *l, list_datum_t d) {
   list_t *ll = l;
+  if (ll->head == NULL) {
+    ll->datum = d;
+    ll->head = ll;
+    return ll;
+  }
   ll = list_extend(l);
   ll->datum = d;
   return ll;
