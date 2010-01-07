@@ -1,5 +1,6 @@
 #include "list.h"
 
+static list_t *list_extend(list_t *l);
 static list_t *list_extend(list_t *l) {
   l->next = list_create();
   l->next->head = l->head;
