@@ -15,8 +15,9 @@ all : $(TARGETS)
 ltest : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LFLAGS)
 
+check :
+	./ltest
+
 clean :
 	rm $(OBJS) $(TARGETS)
 
-test :
-	./ltest
