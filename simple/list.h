@@ -32,6 +32,7 @@ typedef struct list_t {
 list_t *list_create();
 list_datum_t list_get(list_t *l, uint idx);
 list_t *list_add(list_t *l, list_datum_t d);
+list_t *list_addfront(list_t *l, list_datum_t d);
 void list_destroy(list_t *l);
 
 #endif

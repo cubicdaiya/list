@@ -26,6 +26,21 @@ list_t *list_add(list_t *l, list_datum_t d) {
   return ll;
 }
 
+list_t *list_addfront(list_t *l, list_datum_t d) {
+  if (l->head == NULL) {
+    l->datum = d;
+    l->head  = l;
+    return l;
+  }
+  list_t **lh = &(l->head);
+  list_t *ln  = list_create();
+  ln->datum   = d;
+  ln->head    = ln;
+  ln->next    = *lh;
+  *lh         = ln;
+  return l;
+}
+
 list_datum_t list_get(list_t *l, uint idx) {
   list_t *ll = l->head;
   for (int i=0;i<idx;++i) {
