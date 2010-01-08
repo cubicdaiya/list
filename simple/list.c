@@ -11,6 +11,9 @@ static list_t *list_extend(list_t *l) {
   return l->next;
 }
 
+/**
+ * initialize list
+ */
 list_t *list_create() {
   list_t *l;
   LIST_MALLOC(l, sizeof(list_t));
