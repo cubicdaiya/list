@@ -1,6 +1,10 @@
 #include "list.h"
 
 static list_t *list_extend(list_t *l);
+
+/**
+ * extend list
+ */
 static list_t *list_extend(list_t *l) {
   l->next = list_create();
   l->next->head = l->head;
@@ -15,6 +19,9 @@ list_t *list_create() {
   return l;
 }
 
+/**
+ * add an element to the tail of list
+ */
 list_t *list_add(list_t *l, list_datum_t d) {
   list_t *ll = l;
   if (ll->head == NULL) {
@@ -27,6 +34,9 @@ list_t *list_add(list_t *l, list_datum_t d) {
   return ll;
 }
 
+/**
+ * add an element to the head of list
+ */
 list_t *list_addfront(list_t *l, list_datum_t d) {
   if (l->head == NULL) {
     l->datum = d;
@@ -42,6 +52,9 @@ list_t *list_addfront(list_t *l, list_datum_t d) {
   return l;
 }
 
+/**
+ * get the idxth element of list 
+ */
 list_datum_t list_get(list_t *l, uint idx) {
   list_t *ll = l->head;
   for (int i=0;i<idx;++i) {
@@ -51,6 +64,9 @@ list_datum_t list_get(list_t *l, uint idx) {
   return ll->datum;
 }
 
+/**
+ * release all elements of list
+ */
 void list_destroy(list_t *l) {
   for (list_t *p=l->head;p!=NULL;) {
     list_t *current = p;
