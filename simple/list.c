@@ -1,15 +1,9 @@
 #include "list.h"
 
-static list_t *list_extend(list_t *l);
-
 /**
- * extend list
+ * private function
  */
-static list_t *list_extend(list_t *l) {
-  l->next = list_create();
-  l->next->head = l->head;
-  return l->next;
-}
+static list_t *list_extend(list_t *l);
 
 /**
  * initialize list
@@ -79,3 +73,13 @@ void list_destroy(list_t *l) {
   }
 }
 
+/* following is private function */ 
+
+/**
+ * extend list
+ */
+static list_t *list_extend(list_t *l) {
+  l->next = list_create();
+  l->next->head = l->head;
+  return l->next;
+}
