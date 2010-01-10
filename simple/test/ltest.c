@@ -5,13 +5,13 @@
 
 #define NUM 10
 
-void test_list_add(void);
-void test_list_addfront(void);
-void test_list_add_addfront(void);
-void test_list_get(void);
-void test_list_check_head(void);
+static void test_list_add(void);
+static void test_list_addfront(void);
+static void test_list_add_addfront(void);
+static void test_list_get(void);
+static void test_list_check_head(void);
 
-void test_list_add(void) {
+static void test_list_add(void) {
   list_t *l = list_create();
 
   for (int i=0;i<NUM;++i) {
@@ -28,7 +28,7 @@ void test_list_add(void) {
   list_destroy(l);
 }
 
-void test_list_addfront(void) {
+static void test_list_addfront(void) {
   list_t *l = list_create();
   for (int i=0;i<NUM;++i) {
     l = list_addfront(l, i+1);
@@ -43,7 +43,7 @@ void test_list_addfront(void) {
   list_destroy(l);
 }
 
-void test_list_add_addfront(void) {
+static void test_list_add_addfront(void) {
   list_t *l = list_create();
   l = list_add(l, 3);
   l = list_add(l, 4);
@@ -67,7 +67,7 @@ void test_list_add_addfront(void) {
 }
 
 
-void test_list_get(void) {
+static void test_list_get(void) {
   list_t *l = list_create();
   for (int i=0;i<NUM;++i) {
     l = list_add(l, i+1);
@@ -78,7 +78,7 @@ void test_list_get(void) {
   list_destroy(l);
 }
 
-void test_list_check_head(void) {
+static void test_list_check_head(void) {
   list_t *l = list_create();
   for (int i=0;i<NUM;++i) {
     l = list_add(l, i+1);
