@@ -23,7 +23,7 @@ list_t *list_add(list_t *l, list_datum_t d) {
   list_t *ll = l;
   if (ll->head == NULL) {
     ll->datum = d;
-    ll->head = ll;
+    ll->head  = ll;
     return ll;
   }
   ll = list_extend(l);
