@@ -33,6 +33,8 @@ list_t *list_create();
 list_datum_t list_get(list_t *l, uint idx);
 list_t *list_add(list_t *l, list_datum_t d);
 list_t *list_addfront(list_t *l, list_datum_t d);
+list_t *list_join(list_t *l1, list_t *l2);
+list_t *list_head(list_t *l);
 void list_destroy(list_t *l);
 
 #endif

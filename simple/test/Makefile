@@ -21,3 +21,5 @@ check :
 clean :
 	rm $(OBJS) $(TARGETS)
 
+ltest.o: ltest.c ../list.h
+list.o: ../list.c ../list.h

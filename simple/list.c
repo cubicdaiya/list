@@ -40,12 +40,11 @@ list_t *list_addfront(list_t *l, list_datum_t d) {
     l->head  = l;
     return l;
   }
-  list_t **lh = &(l->head);
   list_t *ln  = list_create();
   ln->datum   = d;
   ln->head    = ln;
-  ln->next    = *lh;
-  *lh         = ln;
+  ln->next    = l->head->head;
+  l->head->head = ln;
   return l;
 }
 
@@ -73,6 +72,16 @@ void list_destroy(list_t *l) {
   }
 }
 
+list_t *list_head(list_t *l) {
+  return l->head->head;
+}
+
+list_t *list_join(list_t *l1, list_t *l2) {
+  l1->next = list_head(l2);
+  l2->head = list_head(l1);
+  return l2;
+}
+
 /* following is private function */ 
 
 /**
@@ -80,6 +89,6 @@ void list_destroy(list_t *l) {
  */
 static list_t *list_extend(list_t *l) {
   l->next = list_create();
-  l->next->head = l->head;
+  l->next->head = l->head->head;
   return l->next;
 }
