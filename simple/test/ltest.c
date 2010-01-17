@@ -131,13 +131,6 @@ static void test_list_insert(void) {
   l = list_insert(l, 0,  11);
   l = list_insert(l, 5,  99);
   l = list_insert(l, 12, 100);
-  {
-    int i = 1;
-    for (list_t *p=list_head(l);p!=NULL;p=p->next,++i) {
-      printf("%d ", p->datum);
-    }
-    printf("\n");
-  }
   list_t *p = list_head(l);
   CU_ASSERT(p->datum == 11);
   p = p->next;

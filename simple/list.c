@@ -40,10 +40,10 @@ list_t *list_addfront(list_t *l, list_datum_t d) {
     l->head  = l;
     return l;
   }
-  list_t *ln  = list_create();
-  ln->datum   = d;
-  ln->head    = ln;
-  ln->next    = l->head->head;
+  list_t *ln    = list_create();
+  ln->datum     = d;
+  ln->head      = ln;
+  ln->next      = l->head->head;
   l->head->head = ln;
   return l;
 }
@@ -99,9 +99,9 @@ list_t *list_insert(list_t *l, uint_t idx, list_datum_t d) {
   if (insert_after == NULL) {
     return list_add(l, d);
   }
-  list_t *insert = list_create();
-  insert->datum = d;
-  insert->next  = insert_after;
+  list_t *insert    = list_create();
+  insert->datum     = d;
+  insert->next      = insert_after;
   insert_prev->next = insert;
   return l;
 }
@@ -130,7 +130,7 @@ list_t *list_remove(list_t *l, uint_t idx) {
     remove_after = remove->next;
     LIST_FREE(remove);
     if (remove_after) {
-      remove_prev->next = remove_after;
+      remove_prev->next  = remove_after;
       remove_after->head = head;
       return remove_after;
     } else {
