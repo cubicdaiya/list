@@ -90,14 +90,15 @@ list_t *list_head(list_t *l) {
 list_t *list_insert(list_t *l, uint_t idx, list_datum_t d) {
   if (idx == 0) {
     return list_addfront(l, d);
-  } else if (l->next == NULL) {
-    return list_add(l, d);
   }
   list_t *insert_prev  = list_get(l, idx - 1);
   if (insert_prev == NULL) {
     return l;
   }
   list_t *insert_after = insert_prev->next;
+  if (insert_after == NULL) {
+    return list_add(l, d);
+  }
   list_t *insert = list_create();
   insert->datum = d;
   insert->next  = insert_after;

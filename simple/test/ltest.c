@@ -128,10 +128,18 @@ static void test_list_insert(void) {
   for (int i=0;i<NUM;++i) {
     l = list_add(l, i+1);
   }
-  l = list_insert(l, 0, 9);
-  l = list_insert(l, 10, 100);
+  l = list_insert(l, 0,  11);
+  l = list_insert(l, 5,  99);
+  l = list_insert(l, 12, 100);
+  {
+    int i = 1;
+    for (list_t *p=list_head(l);p!=NULL;p=p->next,++i) {
+      printf("%d ", p->datum);
+    }
+    printf("\n");
+  }
   list_t *p = list_head(l);
-  CU_ASSERT(p->datum == 9);
+  CU_ASSERT(p->datum == 11);
   p = p->next;
   CU_ASSERT(p->datum == 1);
   p = p->next;
@@ -140,6 +148,8 @@ static void test_list_insert(void) {
   CU_ASSERT(p->datum == 3);
   p = p->next;
   CU_ASSERT(p->datum == 4);
+  p = p->next;
+  CU_ASSERT(p->datum == 99);
   p = p->next;
   CU_ASSERT(p->datum == 5);
   p = p->next;
