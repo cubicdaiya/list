@@ -21,7 +21,7 @@
   } while(false)
 
 typedef int list_datum_t;
-typedef unsigned int uint;
+typedef unsigned int uint_t;
 
 typedef struct list_t {
   list_datum_t datum;
@@ -30,11 +30,13 @@ typedef struct list_t {
 } list_t;
 
 list_t *list_create();
-list_datum_t list_get(list_t *l, uint idx);
+list_t *list_get(list_t *l, uint_t idx);
 list_t *list_add(list_t *l, list_datum_t d);
 list_t *list_addfront(list_t *l, list_datum_t d);
 list_t *list_join(list_t *l1, list_t *l2);
 list_t *list_head(list_t *l);
+list_t *list_insert(list_t *l, uint_t idx, list_datum_t d);
+list_t *list_remove(list_t *l, uint_t idx);
 void list_destroy(list_t *l);
 
 #endif
