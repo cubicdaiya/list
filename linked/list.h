@@ -40,12 +40,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define LIST_MALLOC(p, n)              \
-  do {                                 \
-    if (((p) = malloc(n)) == NULL) {   \
-      printf("malloc failed");         \
-      exit(-1);                        \
-    }                                  \
+#define LIST_MALLOC(p, n)		\
+  do {					\
+    if (((p) = malloc(n)) == NULL) {	\
+      fprintf(stderr, "malloc failed"); \
+      exit(-1);				\
+    }					\
   } while(false)
 #define LIST_FREE(p)                            \
   do {                                          \
