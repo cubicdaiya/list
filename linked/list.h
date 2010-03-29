@@ -57,9 +57,9 @@ typedef int list_datum_t;
 typedef unsigned int uint_t;
 
 typedef struct list_t {
-  list_datum_t datum;
-  struct list_t *head;
-  struct list_t *next;
+  list_datum_t datum;  // data
+  struct list_t *head; // pointer to head of list
+  struct list_t *next; // pointer to next element
 } list_t;
 
 list_t *list_create();
