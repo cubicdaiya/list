@@ -25,7 +25,7 @@ static void test_list_add(void) {
   {
     int i = 1;
     for (list_t *p=list_head(l);p!=NULL;p=p->next,++i) {
-      CU_ASSERT(p->datum == i);
+      CU_ASSERT(p->elem == i);
     }
   }
 
@@ -41,7 +41,7 @@ static void test_list_addfront(void) {
   {
     int i = NUM;
     for (list_t *p=list_head(l);p!=NULL;p=p->next,--i) {
-      CU_ASSERT(p->datum == i);
+      CU_ASSERT(p->elem == i);
     }
   }
   list_destroy(l);
@@ -63,7 +63,7 @@ static void test_list_add_addfront(void) {
   {
     int i = 1;
     for (list_t *p=list_head(l);p!=NULL;p=p->next,++i) {
-      CU_ASSERT(p->datum == i);
+      CU_ASSERT(p->elem == i);
     }
   }
   list_destroy(l);
@@ -77,7 +77,7 @@ static void test_list_get(void) {
   }
   for (int i=0;i<NUM;++i) {
     list_t *p = list_get(l, i);
-    CU_ASSERT(p->datum == i+1);
+    CU_ASSERT(p->elem == i+1);
   }
   list_destroy(l);
 }
@@ -117,7 +117,7 @@ static void test_list_join(void) {
   {
     int i = 1;
     for (list_t *p=list_head(l3);p!=NULL;p=p->next,++i) {
-      CU_ASSERT(p->datum == i);
+      CU_ASSERT(p->elem == i);
     }
   }
   list_destroy(l3);
@@ -132,31 +132,31 @@ static void test_list_insert(void) {
   l = list_insert(l, 5,  99);
   l = list_insert(l, 12, 100);
   list_t *p = list_head(l);
-  CU_ASSERT(p->datum == 11);
+  CU_ASSERT(p->elem == 11);
   p = p->next;
-  CU_ASSERT(p->datum == 1);
+  CU_ASSERT(p->elem == 1);
   p = p->next;
-  CU_ASSERT(p->datum == 2);
+  CU_ASSERT(p->elem == 2);
   p = p->next;
-  CU_ASSERT(p->datum == 3);
+  CU_ASSERT(p->elem == 3);
   p = p->next;
-  CU_ASSERT(p->datum == 4);
+  CU_ASSERT(p->elem == 4);
   p = p->next;
-  CU_ASSERT(p->datum == 99);
+  CU_ASSERT(p->elem == 99);
   p = p->next;
-  CU_ASSERT(p->datum == 5);
+  CU_ASSERT(p->elem == 5);
   p = p->next;
-  CU_ASSERT(p->datum == 6);
+  CU_ASSERT(p->elem == 6);
   p = p->next;
-  CU_ASSERT(p->datum == 7);
+  CU_ASSERT(p->elem == 7);
   p = p->next;
-  CU_ASSERT(p->datum == 8);
+  CU_ASSERT(p->elem == 8);
   p = p->next;
-  CU_ASSERT(p->datum == 9);
+  CU_ASSERT(p->elem == 9);
   p = p->next;
-  CU_ASSERT(p->datum == 10);
+  CU_ASSERT(p->elem == 10);
   p = p->next;
-  CU_ASSERT(p->datum == 100);
+  CU_ASSERT(p->elem == 100);
   list_destroy(l);
 }
 
@@ -169,19 +169,19 @@ static void test_list_remove(void) {
   l = list_remove(l, 3);
   l = list_remove(l, 7);
   list_t *p = list_head(l);
-  CU_ASSERT(p->datum == 2);
+  CU_ASSERT(p->elem == 2);
   p = p->next;
-  CU_ASSERT(p->datum == 3);
+  CU_ASSERT(p->elem == 3);
   p = p->next;
-  CU_ASSERT(p->datum == 4);
+  CU_ASSERT(p->elem == 4);
   p = p->next;
-  CU_ASSERT(p->datum == 6);
+  CU_ASSERT(p->elem == 6);
   p = p->next;
-  CU_ASSERT(p->datum == 7);
+  CU_ASSERT(p->elem == 7);
   p = p->next;
-  CU_ASSERT(p->datum == 8);
+  CU_ASSERT(p->elem == 8);
   p = p->next;
-  CU_ASSERT(p->datum == 9);
+  CU_ASSERT(p->elem == 9);
   list_destroy(l);
 }
 

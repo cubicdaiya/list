@@ -54,29 +54,29 @@ list_t *list_create() {
 /**
  * add an element to the tail of list
  */
-list_t *list_add(list_t *l, list_datum_t d) {
+list_t *list_add(list_t *l, list_elem_t e) {
   list_t *ll = l;
   if (ll->head == NULL) {
-    ll->datum = d;
+    ll->elem  = e;
     ll->head  = ll;
     return ll;
   }
   ll = list_extend(l);
-  ll->datum = d;
+  ll->elem = e;
   return ll;
 }
 
 /**
  * add an element to the head of list
  */
-list_t *list_addfront(list_t *l, list_datum_t d) {
+list_t *list_addfront(list_t *l, list_elem_t e) {
   if (l->head == NULL) {
-    l->datum = d;
+    l->elem  = e;
     l->head  = l;
     return l;
   }
   list_t *ln    = list_create();
-  ln->datum     = d;
+  ln->elem      = e;
   ln->head      = ln;
   ln->next      = l->head->head;
   l->head->head = ln;
@@ -122,9 +122,9 @@ list_t *list_head(list_t *l) {
   return l->head->head;
 }
 
-list_t *list_insert(list_t *l, uint_t idx, list_datum_t d) {
+list_t *list_insert(list_t *l, uint_t idx, list_elem_t e) {
   if (idx == 0) {
-    return list_addfront(l, d);
+    return list_addfront(l, e);
   }
   list_t *insert_prev  = list_get(l, idx - 1);
   if (insert_prev == NULL) {
@@ -132,10 +132,10 @@ list_t *list_insert(list_t *l, uint_t idx, list_datum_t d) {
   }
   list_t *insert_after = insert_prev->next;
   if (insert_after == NULL) {
-    return list_add(l, d);
+    return list_add(l, e);
   }
   list_t *insert    = list_create();
-  insert->datum     = d;
+  insert->elem      = e;
   insert->next      = insert_after;
   insert_prev->next = insert;
   return l;
