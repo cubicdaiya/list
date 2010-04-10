@@ -20,7 +20,7 @@ list_t *list_create(uint id) {
   return l;
 }
 
-list_t *list_add(list_t *l, list_datum_t d) {
+list_t *list_add(list_t *l, list_elem_t d) {
   list_t *ll = NULL;
   uint idx = ACTUAL_IDX(l->idx, l->id);
   if (idx >= LIST_ARRAY_SIZE) {
@@ -36,14 +36,14 @@ list_t *list_add(list_t *l, list_datum_t d) {
   return ll;
 }
 
-list_datum_t list_get(list_t *l, uint idx) {
+list_elem_t list_get(list_t *l, uint idx) {
   uint id = idx / LIST_ARRAY_SIZE;
   list_t *ll = l->head;
   for (int i=0;i<id;++i) {
     ll = ll->next;
   }
   if (ll == NULL) {
-    return (list_datum_t)NULL;
+    return (list_elem_t)NULL;
   }
   return ll->datum[ACTUAL_IDX(idx, id)];
 }
@@ -57,9 +57,9 @@ void list_destroy(list_t *l) {
   }
 }
 
-list_datum_t list_iter(list_t **l, uint idx) {
+list_elem_t list_iter(list_t **l, uint idx) {
   list_t *ll = *l;
-  list_datum_t d;
+  list_elem_t d;
   uint aidx = ACTUAL_IDX(idx, ll->id);
   if (aidx >= LIST_ARRAY_SIZE) {
     ll = ll->next;

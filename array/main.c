@@ -13,7 +13,7 @@ int main (int argc, char *argv[]) {
   }
 
   for (int i=0;i<NUM;++i) {
-    list_datum_t d = list_get(l, i);
+    list_elem_t d = list_get(l, i);
     printf("%d ", d);
   }
   printf("\n");
@@ -24,7 +24,7 @@ int main (int argc, char *argv[]) {
     if (p->next == NULL && i >= p->last_idx) {
       break;
     }
-    list_datum_t d = list_iter(&p, i);
+    list_elem_t d = list_iter(&p, i);
     printf("%d ", d);
   }
   printf("\n");
