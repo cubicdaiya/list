@@ -181,7 +181,7 @@ list_t *list_remove(list_t *l, uint_t idx) {
 }
 
 bool list_elem_eq(list_t *l, list_elem_t *e) {
-  return !memcmp(l->elem, e, l->esiz);
+  return memcmp(l->elem, e, l->esiz) == 0;
 }
 
 /* following is private function */ 

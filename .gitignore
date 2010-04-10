@@ -1,5 +1,2 @@
 *.o
-*.a
-*.so
-a.out
-simple/test/ltest
+linked/test/ltest
