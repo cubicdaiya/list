@@ -43,40 +43,42 @@ static list_t *list_extend(list_t *l);
 /**
  * initialize list
  */
-list_t *list_create() {
+list_t *list_create(size_t esiz) {
   list_t *l;
   LIST_MALLOC(l, sizeof(list_t));
   l->head  = NULL;
   l->next  = NULL;
+  l->esiz  = esiz;
+  LIST_MALLOC(l->elem, l->esiz);
   return l;
 }
 
 /**
  * add an element to the tail of list
  */
-list_t *list_add(list_t *l, list_elem_t e) {
+list_t *list_add(list_t *l, list_elem_t *e) {
   list_t *ll = l;
   if (ll->head == NULL) {
-    ll->elem  = e;
+    memcpy(ll->elem, e, ll->esiz);
     ll->head  = ll;
     return ll;
   }
   ll = list_extend(l);
-  ll->elem = e;
+  memcpy(ll->elem, e, ll->esiz);
   return ll;
 }
 
 /**
  * add an element to the head of list
  */
-list_t *list_addfront(list_t *l, list_elem_t e) {
+list_t *list_addfront(list_t *l, list_elem_t *e) {
   if (l->head == NULL) {
-    l->elem  = e;
+    memcpy(l->elem, e, l->esiz);
     l->head  = l;
     return l;
   }
-  list_t *ln    = list_create();
-  ln->elem      = e;
+  list_t *ln    = list_create(l->esiz);
+  memcpy(ln->elem, e, l->esiz);
   ln->head      = ln;
   ln->next      = l->head->head;
   l->head->head = ln;
@@ -107,6 +109,7 @@ void list_destroy(list_t *l) {
   for (list_t *p=list_head(l);p!=NULL;) {
     list_t *current = p;
     list_t *next    = p->next;
+    LIST_FREE(current->elem);
     LIST_FREE(current);
     p = next;    
   }
@@ -122,7 +125,7 @@ list_t *list_head(list_t *l) {
   return l->head->head;
 }
 
-list_t *list_insert(list_t *l, uint_t idx, list_elem_t e) {
+list_t *list_insert(list_t *l, uint_t idx, list_elem_t *e) {
   if (idx == 0) {
     return list_addfront(l, e);
   }
@@ -134,8 +137,8 @@ list_t *list_insert(list_t *l, uint_t idx, list_elem_t e) {
   if (insert_after == NULL) {
     return list_add(l, e);
   }
-  list_t *insert    = list_create();
-  insert->elem      = e;
+  list_t *insert    = list_create(l->esiz);
+  memcpy(insert->elem, e, insert->esiz);
   insert->next      = insert_after;
   insert_prev->next = insert;
   return l;
@@ -177,13 +180,17 @@ list_t *list_remove(list_t *l, uint_t idx) {
   return l;
 }
 
+bool list_elem_eq(list_t *l, list_elem_t *e) {
+  return !memcmp(l->elem, e, l->esiz);
+}
+
 /* following is private function */ 
 
 /**
  * extend list
  */
 static list_t *list_extend(list_t *l) {
-  l->next = list_create();
+  l->next = list_create(l->esiz);
   l->next->head = l->head->head;
   return l->next;
 }

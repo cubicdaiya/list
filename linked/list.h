@@ -38,6 +38,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
 
 #define LIST_MALLOC(p, n)		\
@@ -53,23 +54,25 @@
     (p) = NULL;                                 \
   } while(false)
 
-typedef int list_elem_t;
+typedef void list_elem_t;
 typedef unsigned int uint_t;
 
 typedef struct list_t {
-  list_elem_t elem;  // elememnt
+  list_elem_t   *elem; // element
+  size_t         esiz; // element size
   struct list_t *head; // pointer to head of list
   struct list_t *next; // pointer to next element
 } list_t;
 
-list_t *list_create();
+list_t *list_create(size_t esiz);
 list_t *list_get(list_t *l, uint_t idx);
-list_t *list_add(list_t *l, list_elem_t d);
-list_t *list_addfront(list_t *l, list_elem_t d);
+list_t *list_add(list_t *l, list_elem_t *e);
+list_t *list_addfront(list_t *l, list_elem_t *e);
 list_t *list_join(list_t *l1, list_t *l2);
 list_t *list_head(list_t *l);
-list_t *list_insert(list_t *l, uint_t idx, list_elem_t d);
+list_t *list_insert(list_t *l, uint_t idx, list_elem_t *e);
 list_t *list_remove(list_t *l, uint_t idx);
+bool list_elem_eq(list_t *l, list_elem_t *e);
 void list_destroy(list_t *l);
 
 #endif
