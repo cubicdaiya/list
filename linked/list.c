@@ -154,6 +154,7 @@ list_t *list_remove(list_t *l, uint_t idx) {
     list_t *new_head = head->next;
     new_head->head = new_head;
     l->head = new_head;
+    LIST_FREE(head->elem);
     LIST_FREE(head);
     return l;
   }
@@ -166,6 +167,7 @@ list_t *list_remove(list_t *l, uint_t idx) {
   remove = remove_prev->next;
   if (remove) {
     remove_after = remove->next;
+    LIST_FREE(remove->elem);
     LIST_FREE(remove);
     if (remove_after) {
       remove_prev->next  = remove_after;
