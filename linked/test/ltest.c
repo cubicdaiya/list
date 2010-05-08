@@ -26,7 +26,7 @@ static void test_list_add(void) {
     {
         int i = 1;
         for (list_t *p=list_head(l);p!=NULL;p=p->next,++i) {
-            CU_ASSERT(list_elem_eq(p, &i));
+            CU_ASSERT(list_entry_eq(p, &i));
         }
     }
     
@@ -43,7 +43,7 @@ static void test_list_addfront(void) {
     {
         int i = NUM;
         for (list_t *p=list_head(l);p!=NULL;p=p->next,--i) {
-            CU_ASSERT(list_elem_eq(p, &i));
+            CU_ASSERT(list_entry_eq(p, &i));
         }
     }
     list_destroy(l);
@@ -66,7 +66,7 @@ static void test_list_add_addfront(void) {
     {
         int i = 1;
         for (list_t *p=list_head(l);p!=NULL;p=p->next,++i) {
-            CU_ASSERT(list_elem_eq(p, &i));
+            CU_ASSERT(list_entry_eq(p, &i));
         }
     }
     list_destroy(l);
@@ -82,7 +82,7 @@ static void test_list_get(void) {
     for (int i=0;i<NUM;++i) {
         list_t *p = list_get(l, i);
         int e = i + 1;
-        CU_ASSERT(list_elem_eq(p, &e));
+        CU_ASSERT(list_entry_eq(p, &e));
     }
     list_destroy(l);
 }
@@ -126,7 +126,7 @@ static void test_list_join(void) {
     {
         int i = 1;
         for (list_t *p=list_head(l3);p!=NULL;p=p->next,++i) {
-            CU_ASSERT(list_elem_eq(p, &i));
+            CU_ASSERT(list_entry_eq(p, &i));
         }
     }
     list_destroy(l3);
@@ -145,7 +145,7 @@ static void test_list_insert(void) {
     list_t *p = list_head(l);
     int answers[] = {11,1,2,3,4,99,5,6,7,8,9,10,100};
     for (int i=0;i<sizeof(answers)/sizeof(answers[0]);++i) {
-        CU_ASSERT(list_elem_eq(p, &answers[i]));
+        CU_ASSERT(list_entry_eq(p, &answers[i]));
         p = p->next;
     }
     list_destroy(l);
@@ -163,7 +163,7 @@ static void test_list_remove(void) {
     list_t *p = list_head(l);
     int answers[] = {2,3,4,6,7,8,9};
     for (int i=0;i<sizeof(answers)/sizeof(answers[0]);++i) {
-        CU_ASSERT(list_elem_eq(p, &answers[i]));
+        CU_ASSERT(list_entry_eq(p, &answers[i]));
         p = p->next;
     }
     list_destroy(l);
